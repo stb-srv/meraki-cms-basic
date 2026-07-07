@@ -1,0 +1,109 @@
+# Coolify Deployment Configuration for Taverna Zeus CMS
+# This file contains the recommended configuration for deploying with Coolify
+
+# Application Configuration
+name: taverna-zeus-cms
+version: 1.0.0
+
+# Build Configuration
+build:
+  # Use Node.js 20 LTS for best compatibility
+  node_version: 20
+  
+  # Build command
+  command: npm run build
+  
+  # Output directory
+  output_directory: .next
+  
+  # Environment variables required for build
+  environment:
+    - NEXT_PUBLIC_SUPABASE_URL
+    - NEXT_PUBLIC_SUPABASE_ANON_KEY
+    - SUPABASE_SERVICE_ROLE_KEY
+
+# Deployment Configuration
+deploy:
+  # Use static export for better performance
+  static:
+    enabled: false  # Set to true if you want static export
+    
+  # Server-side rendering configuration
+  server:
+    enabled: true
+    port: 3000
+    command: npm run start
+
+# Environment Variables Template
+# Add these to your Coolify project settings:
+# 
+# Required for Supabase connection:
+# - NEXT_PUBLIC_SUPABASE_URL: https://your-project-ref.supabase.co
+# - NEXT_PUBLIC_SUPABASE_ANON_KEY: your-supabase-anon-key
+# - SUPABASE_SERVICE_ROLE_KEY: your-service-role-key
+#
+# Optional:
+# - NODE_ENV: production
+# - NEXT_PUBLIC_SITE_URL: https://your-domain.com
+
+# Health Check Configuration
+health_check:
+  path: /api/health
+  interval: 30
+  timeout: 10
+
+# Performance Optimization
+performance:
+  # Enable caching for static assets
+  cache:
+    enabled: true
+    max_age: 31536000  # 1 year
+    
+  # Enable compression
+  compression:
+    enabled: true
+    
+  # Enable HTTP/2
+  http2:
+    enabled: true
+
+# Monitoring Configuration (Optional)
+monitoring:
+  # Enable logging
+  logging:
+    level: info
+    
+  # Enable metrics
+  metrics:
+    enabled: true
+    path: /metrics
+
+# Security Configuration
+security:
+  # Enable HTTPS
+  https:
+    enabled: true
+    
+  # Security headers
+  headers:
+    X-Frame-Options: DENY
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: "1; mode=block"
+    Referrer-Policy: strict-origin-when-cross-origin
+
+# Database Configuration (if using direct connection)
+database:
+  # Supabase PostgreSQL connection
+  type: postgres
+  host: your-supabase-host
+  port: 5432
+  database: postgres
+  username: postgres
+  password: your-password
+
+# Notes:
+# 1. This is a template configuration. Adjust values according to your setup.
+# 2. For production, always use HTTPS and secure environment variables.
+# 3. The application will work with mock data if Supabase variables are not set,
+#    but CMS functionality will be limited.
+# 4. For full functionality, ensure all Supabase environment variables are configured.
