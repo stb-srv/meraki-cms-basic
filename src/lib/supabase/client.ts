@@ -48,9 +48,19 @@ export { supabase };
 export const createServerClient = () => {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   
-  if (!supabaseUrl || !serviceKey) {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn('Supabase configuration is missing. Using mock client for server operations.');
+    return createMockClient();
+  }
+  
+  if (!serviceKey) {
     console.warn('Service role key is missing. Using anon key for server client.');
-    return createClient(supabaseUrl || '', supabaseAnonKey || '');
+    return createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    });
   }
   
   return createClient(supabaseUrl, serviceKey, {
@@ -63,7 +73,12 @@ export const createServerClient = () => {
 
 // Client-side client for browser usage
 export const createBrowserClient = () => {
-  return createClient(supabaseUrl || '', supabaseAnonKey || '', {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn('Supabase configuration is missing. Using mock client for browser operations.');
+    return createMockClient();
+  }
+  
+  return createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       storage: typeof window !== 'undefined' ? localStorage : undefined,
       autoRefreshToken: true,
