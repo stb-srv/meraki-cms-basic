@@ -4,39 +4,45 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase configuration is missing. Using mock client for development.');
-  // Create a mock client for development when env vars are not set
-  export const supabase = {
-    from: () => ({
-      select: () => ({
-        eq: () => ({
-          single: () => Promise.resolve({ data: null, error: null }),
-          order: () => ({
-            single: () => Promise.resolve({ data: null, error: null })
-          })
+// Mock client for development when env vars are not set
+const createMockClient = () => ({
+  from: () => ({
+    select: () => ({
+      eq: () => ({
+        single: () => Promise.resolve({ data: null, error: null }),
+        order: () => ({
+          single: () => Promise.resolve({ data: null, error: null })
         })
       })
-    }),
-    auth: {
-      getSession: () => Promise.resolve({ data: { session: null }, error: null }),
-      signInWithPassword: () => Promise.resolve({ data: { session: null, user: null }, error: null }),
-      signOut: () => Promise.resolve({ error: null }),
-      onAuthStateChange: () => {}
-    },
-    storage: {
-      from: () => ({
-        list: () => Promise.resolve({ data: [], error: null }),
-        upload: () => Promise.resolve({ data: { path: '' }, error: null }),
-        download: () => Promise.resolve({ data: null, error: null }),
-        remove: () => Promise.resolve({ data: null, error: null })
-      })
-    }
-  } as any;
+    })
+  }),
+  auth: {
+    getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+    signInWithPassword: () => Promise.resolve({ data: { session: null, user: null }, error: null }),
+    signOut: () => Promise.resolve({ error: null }),
+    onAuthStateChange: () => {}
+  },
+  storage: {
+    from: () => ({
+      list: () => Promise.resolve({ data: [], error: null }),
+      upload: () => Promise.resolve({ data: { path: '' }, error: null }),
+      download: () => Promise.resolve({ data: null, error: null }),
+      remove: () => Promise.resolve({ data: null, error: null })
+    })
+  }
+});
+
+// Create and export the Supabase client
+let supabase: any;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn('Supabase configuration is missing. Using mock client for development.');
+  supabase = createMockClient();
 } else {
-  // Create real Supabase client
-  export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
 }
+
+export { supabase };
 
 // Server-side client with service role key for admin operations
 export const createServerClient = () => {
