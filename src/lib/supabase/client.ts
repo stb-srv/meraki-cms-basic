@@ -195,6 +195,30 @@ const createMockClient = () => {
         // Mock auth state change
         callback('INITIAL_SESSION', { session: null });
         return { unsubscribe: () => {} };
+      },
+      admin: {
+        createUser: (options: any) => Promise.resolve({
+          data: {
+            user: {
+              id: `mock-user-${Date.now()}`,
+              email: options.email,
+              created_at: new Date().toISOString()
+            }
+          },
+          error: null
+        }),
+        deleteUser: (userId: string) => Promise.resolve({ data: {}, error: null }),
+        listUsers: () => Promise.resolve({ data: { users: [] }, error: null }),
+        getUserById: (userId: string) => Promise.resolve({
+          data: {
+            user: {
+              id: userId,
+              email: `mock-${userId}@example.com`,
+              created_at: new Date().toISOString()
+            }
+          },
+          error: null
+        })
       }
     },
     storage: {
@@ -210,6 +234,32 @@ const createMockClient = () => {
 };
 
 // Create and export the Supabase client
+// Type for the mock client to satisfy TypeScript
+interface MockSupabaseClient {
+  from: (table: string) => any;
+  auth: {
+    getSession: () => Promise<any>;
+    signInWithPassword: (options: any) => Promise<any>;
+    signOut: () => Promise<any>;
+    onAuthStateChange: (callback: any) => any;
+    admin: {
+      createUser: (options: any) => Promise<any>;
+      deleteUser: (userId: string) => Promise<any>;
+      listUsers: () => Promise<any>;
+      getUserById: (userId: string) => Promise<any>;
+    };
+  };
+  storage: {
+    from: (bucket: string) => {
+      list: (options?: any) => Promise<any>;
+      upload: (path: string, file: any, options?: any) => Promise<any>;
+      download: (path: string) => Promise<any>;
+      remove: (paths: string[]) => Promise<any>;
+      getPublicUrl: (path: string) => string;
+    };
+  };
+}
+
 let supabase: any;
 
 if (!supabaseUrl || !supabaseAnonKey) {
@@ -218,7 +268,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
     console.error(errorMessage);
   }
   console.warn('Using mock client for development. CMS functionality will be limited.');
-  supabase = createMockClient();
+  supabase = createMockClient() as unknown as MockSupabaseClient;
 } else {
   supabase = createClient(supabaseUrl, supabaseAnonKey);
 }
