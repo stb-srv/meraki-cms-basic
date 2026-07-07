@@ -18,6 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://taverna-zeus.de'),
   title: {
     default: 'Taverna Zeus - Griechisches Restaurant',
     template: '%s | Taverna Zeus',
