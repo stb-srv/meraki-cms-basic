@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Restaurant, ChefHat, Heart, Star, Users, Calendar, Award } from 'lucide-react';
+import { Building2, ChefHat, Heart, Star, Users, Calendar, Award, Leaf } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { Header } from '@/components/Header';
@@ -29,7 +29,7 @@ export default function AboutUsPage() {
         <section className="py-16 bg-gradient-to-br from-primary-600 to-primary-800 dark:from-primary-800 dark:to-primary-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Restaurant className="w-8 h-8 text-white" />
+              <Building2 className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Über uns
@@ -82,7 +82,7 @@ export default function AboutUsPage() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-800/30 dark:to-primary-900/30">
-                    <Restaurant className="w-16 h-16 text-primary-600 dark:text-primary-400 opacity-50" />
+                    <Building2 className="w-16 h-16 text-primary-600 dark:text-primary-400 opacity-50" />
                   </div>
                 )}
               </div>
@@ -257,7 +257,7 @@ export default function AboutUsPage() {
               <div className="bg-white dark:bg-gray-700 rounded-xl p-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Restaurant className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    <Building2 className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
@@ -334,7 +334,7 @@ export default function AboutUsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Restaurant className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                <Building2 className="w-8 h-8 text-purple-600 dark:text-purple-400" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Bildgalerie
@@ -358,7 +358,7 @@ export default function AboutUsPage() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-800/30 dark:to-primary-900/30">
-                      <Restaurant className="w-8 h-8 text-primary-600 dark:text-primary-400 opacity-50" />
+                      <Building2 className="w-8 h-8 text-primary-600 dark:text-primary-400 opacity-50" />
                     </div>
                   )}
                 </div>

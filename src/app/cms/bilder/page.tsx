@@ -64,7 +64,7 @@ export default function ImageManagementPage() {
         // Get all files from storage bucket
         const { data: storageFiles, error: storageError } = await supabase.storage
           .from('restaurant-images')
-          .list({ limit: 100 });
+          .list('', { limit: 100 });
 
         if (storageError) {
           console.error('Error fetching files from storage:', storageError);
@@ -475,7 +475,7 @@ export default function ImageManagementPage() {
                   <div className="absolute top-2 right-2 flex space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <Button
                       variant="ghost"
-                      size="xs"
+                      size="icon"
                       onClick={() => window.open(image.url, '_blank')}
                       className="h-6 w-6 p-0"
                     >
@@ -483,7 +483,7 @@ export default function ImageManagementPage() {
                     </Button>
                     <Button
                       variant="destructive"
-                      size="xs"
+                      size="icon"
                       onClick={() => handleDeleteImage(image)}
                       disabled={isLoading}
                       className="h-6 w-6 p-0"

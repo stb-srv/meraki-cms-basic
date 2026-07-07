@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Save, X, Image as ImageIcon, Upload } from 'lucide-react';
+import { ArrowLeft, Save, X, Image as ImageIcon, Upload, Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useMenu } from '@/hooks/useMenu';
 import { Button } from '@/components/ui/Button';

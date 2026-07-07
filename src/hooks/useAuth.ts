@@ -111,15 +111,16 @@ export function useAuth() {
           .select('*')
           .eq('email', session.user.email)
           .single()
-          .then(({ data: userData, error: userError }) => {
+          .then(({ data: userData, error: userError }: { data: any | null; error: any | null }) => {
             if (userError && userError.code !== 'PGRST116') {
               setAuthState({
                 user: {
                   id: session.user.id,
-                  email: session.user.email,
+                  email: session.user.email || '',
                   name: session.user.user_metadata?.name || null,
                   role: 'viewer',
                   is_active: true,
+                  last_login: new Date().toISOString(),
                   created_at: new Date().toISOString(),
                   updated_at: new Date().toISOString(),
                 },

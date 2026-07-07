@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Restaurant, ChefHat, Heart } from 'lucide-react';
+import { Building2, ChefHat, Heart } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 
 export function AboutSection() {
@@ -29,7 +29,7 @@ export function AboutSection() {
           <div className="space-y-6">
             <div className="flex items-center space-x-2">
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-full flex items-center justify-center">
-                <Restaurant className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                <Building2 className="w-6 h-6 text-primary-600 dark:text-primary-400" />
               </div>
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -81,7 +81,7 @@ export function AboutSection() {
               </div>
 
               <div className="text-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <Restaurant className="w-8 h-8 mx-auto mb-2 text-green-500" />
+                <Building2 className="w-8 h-8 mx-auto mb-2 text-green-500" />
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                   Frische Zutaten
                 </h3>
@@ -112,7 +112,7 @@ export function AboutSection() {
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-800 dark:to-primary-900 flex items-center justify-center">
                   <div className="text-center">
-                    <Restaurant className="w-16 h-16 mx-auto mb-4 text-primary-600 dark:text-primary-400 opacity-50" />
+                    <Building2 className="w-16 h-16 mx-auto mb-4 text-primary-600 dark:text-primary-400 opacity-50" />
                     <p className="text-gray-500 dark:text-gray-400">
                       Restaurant Bild
                     </p>

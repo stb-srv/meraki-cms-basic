@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Phone, Mail, Clock, Navigation, Star, Heart, Restaurant } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Navigation, Star, Heart, Building2 } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { Header } from '@/components/Header';
@@ -234,7 +234,7 @@ export default function LocationPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-6 bg-white dark:bg-gray-700 rounded-xl">
                 <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Restaurant className="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                  <Building2 className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                   Authentische Atmosphäre
