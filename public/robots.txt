@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taverna-zeus.com/sitemap.xml
+
+# Crawl-delay: 2
+
+# Disallow crawling of CMS admin pages
+Disallow: /cms/
+Disallow: /cms/login
+Disallow: /cms/speisekarte
+Disallow: /cms/oeffnungszeiten
+Disallow: /cms/standort
+Disallow: /cms/einstellungen
+Disallow: /cms/bilder
+Disallow: /cms/benutzer
+Disallow: /cms/seiten
+Disallow: /cms/import-export
+
+# Allow public pages
+Allow: /cms/login
+Allow: /cms
+
+# Googlebot specific rules
+User-agent: Googlebot
+Allow: /
+Disallow: /cms/
+
+# Bingbot specific rules
+User-agent: Bingbot
+Allow: /
+Disallow: /cms/
